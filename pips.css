@@ -215,9 +215,9 @@ div.quadl {
 	background: #FFF;
 	color: #333;
 	width: 50%;
-	height: 50%;
+	height: 300px;
 	float: left;
-	border: 1px solid #333;
+	border: 1px dotted #ccc;
 	margin: 0px -1px;
 }
 
@@ -225,8 +225,8 @@ div.quadr {
 	background: #FFF;
 	color: #333;
 	width: 50%;
-	height: 50%;
+	height: 300px;
 	float: right;
-	border: 1px solid #333;
+	border: 1px dotted #ccc;
 	margin: 0px -1px;
 }

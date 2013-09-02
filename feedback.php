@@ -57,8 +57,43 @@ $query = "SELECT value AS ind_speaking FROM indiv_static WHERE reportid = ".$_GE
 $ind_result = mysql_query($query) or die(mysql_error());
 $ind_row = mysql_fetch_array($ind_result);
 
+$balance_pct = 100/$agg_row['num_people'];
+$ind_pct = 100*$ind_row['ind_speaking']/$agg_row['total_speaking'];
+
+// Figure out the individual's category
+$inc = 0.20;
+$r1 = $balance_pct + $balance_pct*$inc;
+$r2 = $balance_pct + $balance_pct*$inc*2;
+$l1 = $balance_pct - $balance_pct*$inc;
+$l2 = $balance_pct - $balance_pct*$inc*2;
+
 echo $agg_row['total_speaking'].", ".$agg_row['num_people']."<BR>";
 echo $ind_row['ind_speaking']."<BR>";
+
+$cat = 0;
+if($ind_pct <= $l2) {
+	$cat = -2; 
+} else
+if($ind_pct <= $l1) {
+	$cat = -1;
+} else 
+if($ind_pct >= $r2) {
+	$cat = 2;
+}
+else
+if($ind_pct >= $r1) {
+	$cat = 1;
+}
+// Draw the table
+$cols[-2] = "#F59759";
+$cols[-1] = "#F5CA59";
+$cols[0] = "#93BC69";
+$cols[1] = "#F5CA59";
+$cols[2] = "#F59759";
+
+echo '<table>';
+
+echo '</table>';
 
 echo '</div>';
 
@@ -74,7 +109,7 @@ echo '<div class="quadr">';
 echo 'Engagement with Group Members';
 echo '</div>';
 
-
+echo '<br>';
 echo '</div>';
 
 include './plainfooter.php';
